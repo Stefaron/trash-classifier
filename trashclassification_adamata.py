@@ -11,13 +11,9 @@ Original file is located at
 The first step in this project involved installing all necessary libraries. Key dependencies include wandb for experiment tracking, tensorflow for model development, and torchvision for data preprocessing. These libraries were chosen for their robust functionality and seamless integration with popular machine learning ecosystems. Leveraging these tools accelerated development and evaluation processes. However, dependency management relies on an updated environment and stable internet connectivity to avoid compatibility issues.
 """
 
-# Install dependencies (if needed)
-!pip install wandb datasets requests transformers torchvision huggingface_hub
-
 import requests
 import zipfile
 import io
-import wandb
 import os
 import numpy as np
 import seaborn as sns
@@ -39,16 +35,8 @@ from keras.utils import plot_model
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.utils.class_weight import compute_class_weight
 
-"""##Iniciate wandb"""
 
-wandb.login()
-wandb.init(project="trash-classification")
-
-"""##Iniciate Dataset
-
-The dataset used in this project was sourced from TrashNet, hosted on Hugging Face. This dataset contains images categorized by waste types. After downloading, a detailed analysis was conducted to ensure that all images were consistent in dimensions and ready for preprocessing. This initial step is crucial to ensure that the data pipeline runs smoothly, and it helps identify potential issues, such as non-standard image sizes, which could hinder model training.
-"""
-
+output_dir = "./data"
 # URL file ZIP
 url = "https://huggingface.co/datasets/garythung/trashnet/resolve/main/dataset-resized.zip"
 
@@ -57,7 +45,7 @@ response = requests.get(url)
 
 # Mengekstrak file ZIP
 with zipfile.ZipFile(io.BytesIO(response.content)) as zip_ref:
-    zip_ref.extractall("/content")
+    zip_ref.extractall(output_dir)
 
 """##Analyze dataset
 
