@@ -20,6 +20,9 @@ jobs:
         with:
           python-version: '3.8'
 
+      - name: Create data directory
+        run: mkdir -p ./data
+
       # Step 3: Install dependencies
       - name: Install dependencies
         run: |
