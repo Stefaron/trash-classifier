@@ -26,7 +26,8 @@ jobs:
       # Step 3: Install dependencies
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt || echo "Warning: Skipping incompatible dependencies"
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
 
       # Step 4: Train the model
